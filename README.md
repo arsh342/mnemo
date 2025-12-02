@@ -9,7 +9,6 @@ The official landing page and documentation site for **Mnemo**, the intelligent 
 - **Styling:** Tailwind CSS
 - **Icons:** Lucide React
 - **Animations:** Framer Motion, Custom CSS
-- **Deployment:** Vercel (Recommended)
 
 ## ✨ Features
 
@@ -31,28 +30,6 @@ The official landing page and documentation site for **Mnemo**, the intelligent 
 - **Timeline View:** Browse complete browsing history with session restoration.
 - **Custom Rules:** Fine-grained control with domain-specific archiving rules.
 
-## 🛠️ Getting Started
-
-1.  **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-2.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-3.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📂 Project Structure
-
-- `app/`: Next.js App Router pages and layouts.
-- `components/ui/`: Reusable UI components (Buttons, Cards, Animations).
-- `public/`: Static assets (images, icons).
-- `lib/`: Utility functions.
 
 ## 📄 License
 

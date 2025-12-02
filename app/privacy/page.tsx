@@ -125,8 +125,8 @@ export default function PrivacyPolicy() {
         ]}
         mainLinks={[
           { href: "/#features", label: "Features" },
-          { href: "https://github.com/arsh342", label: "Documentation" },
-          { href: "https://github.com/arsh342", label: "GitHub" },
+          { href: "https://github.com/arsh342/mnemo", label: "Documentation" },
+          { href: "https://github.com/arsh342/mnemo", label: "GitHub" },
           { href: "/#coming-soon", label: "Chrome Store" },
         ]}
         legalLinks={[

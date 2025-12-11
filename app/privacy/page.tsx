@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
         {/* Content */}
         <article className="prose prose-slate max-w-none">
           <h1 className="text-4xl font-bold text-[#1d1d1f] mb-2">Privacy Policy</h1>
-          <p className="text-[#6e6e73] mb-8">Last Updated: December 1, 2025</p>
+          <p className="text-[#6e6e73] mb-8">Last Updated: December 11, 2025</p>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">Our Commitment to Privacy</h2>
@@ -92,6 +92,23 @@ export default function PrivacyPolicy() {
                 <p className="text-[#6e6e73]">You can delete individual items or permanently purge all data with one click in Settings.</p>
               </div>
             </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">Chrome Web Store Data Usage Disclosure</h2>
+            <p className="text-[#6e6e73] mb-4">As required by the Chrome Web Store, Mnemo collects:</p>
+            <ul className="list-disc pl-6 space-y-2 text-[#6e6e73] mb-6">
+              <li><strong>Web History:</strong> URLs and page titles of visited sites</li>
+              <li><strong>Website Content:</strong> Limited text extracts (~2KB) and optional screenshots</li>
+              <li><strong>User Activity:</strong> Interaction signals including scroll depth, clicks, dwell time, and clipboard events</li>
+            </ul>
+            <p className="text-[#6e6e73] mb-4"><strong>Important:</strong> All collected data:</p>
+            <ul className="list-disc pl-6 space-y-2 text-[#6e6e73]">
+              <li>Remains on your local device only</li>
+              <li>Is never transmitted to external servers</li>
+              <li>Is never sold or shared with third parties</li>
+              <li>Is used solely for tab management and importance scoring</li>
+            </ul>
           </section>
 
           <section className="mb-12">

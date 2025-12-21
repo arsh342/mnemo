@@ -147,7 +147,7 @@ export default function Home() {
               morphTime={1.5}
               cooldownTime={0.5}
               className="font-bold w-full"
-              textClassName="bg-gradient-to-r from-[#8b7bff] to-[#b794f6] bg-clip-text text-transparent !text-5xl md:!text-6xl whitespace-nowrap"
+              textClassName="bg-gradient-to-r from-[#8b7bff] to-[#b794f6] bg-clip-text text-transparent !text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl"
             />
           </div>
 
@@ -216,12 +216,12 @@ export default function Home() {
 
       {/* CTA Section */}
       <section id="download" className="py-24 px-6">
-        <div className="h-[40rem] w-full rounded-3xl flex md:items-center md:justify-center bg-[#8b7bff] antialiased relative overflow-hidden">
+        <div className="h-auto min-h-[500px] md:h-[40rem] w-full rounded-3xl flex md:items-center md:justify-center bg-[#8b7bff] antialiased relative overflow-hidden">
           <Spotlight
             className="-top-40 left-0 md:left-60 md:-top-20"
             fill="white"
           />
-          <div className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0">
+          <div className="p-4 max-w-7xl mx-auto relative z-10 w-full py-12 md:pt-20 md:md:pt-0">
             <h1 className="text-4xl md:text-7xl font-bold text-center text-white">
               Ready to Transform <br /> Your Tab Management?
             </h1>

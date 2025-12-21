@@ -1,15 +1,118 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { Brain, Search, Sparkles, Shield, Zap, Clock, Twitter, Github, Linkedin } from 'lucide-react';
-import { FlickeringGrid } from '@/components/ui/flickering-grid';
-import { Footer } from '@/components/ui/footer';
-import { GooeyText } from '@/components/ui/gooey-text-morphing';
-import { Feature } from '@/components/ui/feature-with-advantages';
-import { Spotlight } from '@/components/ui/spotlight';
+import { useEffect, useRef, useState } from "react";
+import {
+  Brain,
+  Search,
+  Sparkles,
+  Shield,
+  Zap,
+  Clock,
+  Twitter,
+  Github,
+  Linkedin,
+} from "lucide-react";
+import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { Footer } from "@/components/ui/footer";
+import { GooeyText } from "@/components/ui/gooey-text-morphing";
+import { Feature } from "@/components/ui/feature-with-advantages";
+import { Spotlight } from "@/components/ui/spotlight";
 
+// Browser detection function
+function detectBrowser() {
+  if (typeof window === "undefined") return "chromium";
+
+  const userAgent = window.navigator.userAgent.toLowerCase();
+
+  if (userAgent.includes("samsungbrowser")) return "samsung";
+  if (userAgent.includes("edg")) return "edge";
+  if (userAgent.includes("opr") || userAgent.includes("opera")) return "opera";
+  if (userAgent.includes("brave")) return "brave";
+  if (userAgent.includes("vivaldi")) return "vivaldi";
+  if (userAgent.includes("arc")) return "arc";
+  if (userAgent.includes("firefox")) return "firefox";
+  if (userAgent.includes("safari") && !userAgent.includes("chrome"))
+    return "safari";
+  if (userAgent.includes("chrome")) return "chrome";
+
+  // Check if it's a Chromium-based browser (fallback)
+  if (userAgent.includes("chromium") || userAgent.includes("crios"))
+    return "chromium";
+
+  return "chromium"; // default
+}
+
+// Browser config
+const browserConfig = {
+  chrome: {
+    icon: "/chrome.png",
+    text: "Add to Chrome",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  chromium: {
+    icon: "/chromium.png",
+    text: "Add to Browser",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  edge: {
+    icon: "/edge.png",
+    text: "Add to Edge",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  brave: {
+    icon: "/brave.png",
+    text: "Add to Brave",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  arc: {
+    icon: "/arc.png",
+    text: "Add to Arc",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  firefox: {
+    icon: "/firefox.png",
+    text: "Not Available for Firefox",
+    storeUrl: "#",
+  },
+  safari: {
+    icon: "/safari.png",
+    text: "Not Available for Safari",
+    storeUrl: "#",
+  },
+  opera: {
+    icon: "/opera.png",
+    text: "Add to Opera",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  vivaldi: {
+    icon: "/vivaldi.png",
+    text: "Add to Vivaldi",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+  samsung: {
+    icon: "/samsung.png",
+    text: "Add to Samsung Internet",
+    storeUrl:
+      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+  },
+};
 
 export default function Home() {
+  const [browser, setBrowser] =
+    useState<keyof typeof browserConfig>("chromium");
+
+  useEffect(() => {
+    setBrowser(detectBrowser() as keyof typeof browserConfig);
+  }, []);
+
+  const currentBrowser = browserConfig[browser];
   return (
     <main className="min-h-screen relative">
       {/* Full page FlickeringGrid background */}
@@ -36,7 +139,11 @@ export default function Home() {
           {/* Headline with Morphing Text */}
           <div className="min-h-[150px] flex items-center justify-center mb-6 w-full">
             <GooeyText
-              texts={["Never Lose a Tab", "Always Find a Tab", "Smart Archive Tabs"]}
+              texts={[
+                "Never Lose a Tab",
+                "Always Find a Tab",
+                "Smart Archive Tabs",
+              ]}
               morphTime={1.5}
               cooldownTime={0.5}
               className="font-bold w-full"
@@ -45,11 +152,46 @@ export default function Home() {
           </div>
 
           <p className="text-xl md:text-2xl text-[#6e6e73] max-w-3xl mx-auto mb-12 animate-fade-in delay-200">
-            Intelligent tab management through automated context capture. 
+            Intelligent tab management through automated context capture.
             Archive tabs confidently, restore instantly.
           </p>
 
-          {/* CTA Buttons Removed */}
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in delay-300">
+            {currentBrowser.storeUrl !== "#" ? (
+              <a
+                href={currentBrowser.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#8b7bff] text-white rounded-full font-semibold hover:bg-[#9d8dff] transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <img
+                  src={currentBrowser.icon}
+                  alt={browser}
+                  className="w-5 h-5"
+                />
+                {currentBrowser.text} - It's Free
+              </a>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-8 py-4 bg-gray-400 text-white rounded-full font-semibold cursor-not-allowed opacity-60">
+                <img
+                  src={currentBrowser.icon}
+                  alt={browser}
+                  className="w-5 h-5"
+                />
+                {currentBrowser.text}
+              </div>
+            )}
+            <a
+              href="https://github.com/arsh342/mnemo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1d1d1f] rounded-full font-semibold hover:bg-[#fafafa] transition-all border border-[#e8e8ed] shadow-sm hover:shadow-md"
+            >
+              <Github className="w-5 h-5" />
+              View on GitHub
+            </a>
+          </div>
 
           {/* Stats */}
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in delay-500">
@@ -67,15 +209,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-
       </section>
 
       {/* Features Section */}
       <Feature />
 
-      {/* Coming Soon Section */}
-      <section id="coming-soon" className="py-24 px-6">
+      {/* CTA Section */}
+      <section id="download" className="py-24 px-6">
         <div className="h-[40rem] w-full rounded-3xl flex md:items-center md:justify-center bg-[#8b7bff] antialiased relative overflow-hidden">
           <Spotlight
             className="-top-40 left-0 md:left-60 md:-top-20"
@@ -83,12 +223,38 @@ export default function Home() {
           />
           <div className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0">
             <h1 className="text-4xl md:text-7xl font-bold text-center text-white">
-              Browser Extension <br /> Coming Soon.
+              Ready to Transform <br /> Your Tab Management?
             </h1>
             <p className="mt-4 font-normal text-base text-white/90 max-w-lg text-center mx-auto">
-              Experience intelligent tab management directly in your browser. 
+              Experience intelligent tab management directly in your browser.
               Never lose context again with our powerful extension.
             </p>
+            <div className="flex justify-center mt-8">
+              {currentBrowser.storeUrl !== "#" ? (
+                <a
+                  href={currentBrowser.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8b7bff] rounded-full font-semibold hover:bg-[#fafafa] transition-all hover:scale-105 shadow-xl hover:shadow-2xl"
+                >
+                  <img
+                    src={currentBrowser.icon}
+                    alt={browser}
+                    className="w-5 h-5"
+                  />
+                  {currentBrowser.text} - It's Free
+                </a>
+              ) : (
+                <div className="inline-flex items-center gap-2 px-8 py-4 bg-gray-400 text-white rounded-full font-semibold cursor-not-allowed opacity-60">
+                  <img
+                    src={currentBrowser.icon}
+                    alt={browser}
+                    className="w-5 h-5"
+                  />
+                  {currentBrowser.text}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -118,7 +284,10 @@ export default function Home() {
           { href: "#features", label: "Features" },
           { href: "https://github.com/arsh342/mnemo", label: "Documentation" },
           { href: "https://github.com/arsh342/mnemo", label: "GitHub" },
-          { href: "#coming-soon", label: "Chrome Store" },
+          {
+            href: "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+            label: "Chrome Store",
+          },
         ]}
         legalLinks={[
           { href: "/privacy", label: "Privacy Policy" },
@@ -132,5 +301,3 @@ export default function Home() {
     </main>
   );
 }
-
-

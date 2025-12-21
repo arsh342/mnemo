@@ -3,14 +3,15 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Mnemo - Intelligent Tab Management",
-  description: "Stop losing tabs. Mnemo intelligently archives inactive tabs while preserving complete context for instant restoration.",
+  description:
+    "Never lose a tab again. Mnemo intelligently archives inactive tabs while preserving complete context for instant restoration. Available now for Chrome.",
   icons: {
     icon: [
-      { url: '/icon-48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: "/icon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: '/icon-48.png',
-    apple: '/icon-192.png',
+    shortcut: "/icon-48.png",
+    apple: "/icon-192.png",
   },
 };
 

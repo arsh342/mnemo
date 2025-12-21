@@ -97,7 +97,7 @@ const browserConfig = {
       "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
   },
   samsung: {
-    icon: "/samsung.png",
+    icon: "/samsungbrowser.png",
     text: "Add to Samsung Internet",
     storeUrl:
       "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",

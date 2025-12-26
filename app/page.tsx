@@ -11,12 +11,31 @@ import {
   Twitter,
   Github,
   Linkedin,
+  Download,
+  FolderOpen,
+  Settings,
+  CheckCircle2,
+  Check,
+  ArrowRight,
+  ArrowLeft,
 } from "lucide-react";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { Footer } from "@/components/ui/footer";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { Feature } from "@/components/ui/feature-with-advantages";
 import { Spotlight } from "@/components/ui/spotlight";
+import {
+  Stepper,
+  StepperContent,
+  StepperDescription,
+  StepperIndicator,
+  StepperItem,
+  StepperNav,
+  StepperPanel,
+  StepperSeparator,
+  StepperTitle,
+  StepperTrigger,
+} from "@/components/ui/stepper";
 
 // Browser detection function
 function detectBrowser() {
@@ -95,6 +114,280 @@ const browserConfig = {
     storeUrl: "/mnemo.zip",
   },
 };
+
+// Installation Steps
+const installationSteps = [
+  {
+    title: "Download Extension",
+    description: "Download mnemo.zip from the website",
+    icon: Download,
+  },
+  {
+    title: "Extract Files",
+    description: "Unzip the downloaded file to a folder",
+    icon: FolderOpen,
+  },
+  {
+    title: "Enable Developer Mode",
+    description: "Turn on Developer mode in your browser",
+    icon: Settings,
+  },
+  {
+    title: "Load Extension",
+    description: 'Click "Load unpacked" and select folder',
+    icon: CheckCircle2,
+  },
+];
+
+// Installation Section Component
+function InstallationSection({
+  browser,
+}: {
+  browser: keyof typeof browserConfig;
+}) {
+  const currentBrowser = browserConfig[browser];
+  const isSupported = currentBrowser.storeUrl !== "#";
+  const [activeStep, setActiveStep] = useState(1);
+
+  if (!isSupported) {
+    return null; // Don't show installation for unsupported browsers
+  }
+
+  const handleNext = () => {
+    if (activeStep < installationSteps.length) {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (activeStep > 1) {
+      setActiveStep(activeStep - 1);
+    }
+  };
+
+  return (
+    <section id="installation" className="py-24 px-6 bg-[var(--clay-bg)]">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center space-y-4 mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--clay-text)]">
+            Easy Installation
+          </h2>
+          <p className="text-lg text-[var(--clay-text-muted)] max-w-2xl mx-auto">
+            Follow these simple steps to install Mnemo on{" "}
+            <span className="font-semibold text-[var(--clay-accent)]">
+              {browser.charAt(0).toUpperCase() + browser.slice(1)}
+            </span>
+          </p>
+        </div>
+
+        {/* Stepper */}
+        <div className="clay-card p-6 md:p-12">
+          <Stepper
+            className="flex flex-col gap-8"
+            value={activeStep}
+            onValueChange={setActiveStep}
+            orientation="horizontal"
+            indicators={{
+              completed: <Check className="size-4" />,
+            }}
+          >
+            <StepperNav>
+              {installationSteps.map((step, index) => (
+                <StepperItem key={index} step={index + 1}>
+                  <StepperTrigger>
+                    <StepperIndicator className="data-[state=completed]:bg-green-500 data-[state=completed]:text-white data-[state=active]:bg-[var(--clay-accent)] data-[state=active]:text-white">
+                      {index + 1}
+                    </StepperIndicator>
+                    <div className="hidden md:block text-left">
+                      <StepperTitle className="text-[var(--clay-text)]">
+                        {step.title}
+                      </StepperTitle>
+                      <StepperDescription>
+                        {step.description}
+                      </StepperDescription>
+                    </div>
+                  </StepperTrigger>
+                  {index < installationSteps.length - 1 && (
+                    <StepperSeparator className="group-data-[state=completed]/step:bg-green-500" />
+                  )}
+                </StepperItem>
+              ))}
+            </StepperNav>
+
+            <StepperPanel>
+              {installationSteps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <StepperContent key={index} value={index + 1}>
+                    <div className="flex flex-col items-center gap-4 p-4 md:p-8 text-center">
+                      <div className="rounded-full bg-[var(--clay-accent)]/10 p-4">
+                        <Icon className="size-8 text-[var(--clay-accent)]" />
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="text-2xl font-semibold text-[var(--clay-text)]">
+                          {step.title}
+                        </h3>
+                        <p className="text-[var(--clay-text-muted)] max-w-md">
+                          {step.description}
+                        </p>
+                      </div>
+                      {index === 0 && (
+                        <div className="mt-4 space-y-3 text-left w-full max-w-md">
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Click the download button above
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Save the mnemo.zip file to your computer
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Remember the download location
+                          </p>
+                        </div>
+                      )}
+                      {index === 1 && (
+                        <div className="mt-4 space-y-3 text-left w-full max-w-md">
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Right-click the downloaded zip file
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Select "Extract All" or use your preferred
+                            extraction tool
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Choose a permanent location for the folder (don't
+                            delete it later!)
+                          </p>
+                        </div>
+                      )}
+                      {index === 2 && (
+                        <div className="mt-4 space-y-3 text-left w-full max-w-md">
+                          <p className="text-sm text-[var(--clay-text-muted)] mb-2">
+                            • Open your browser's extensions page:
+                          </p>
+                          <code className="block bg-gray-100 px-3 py-2 rounded text-xs font-mono">
+                            {browser === "chrome" && "chrome://extensions"}
+                            {browser === "edge" && "edge://extensions"}
+                            {browser === "brave" && "brave://extensions"}
+                            {browser === "arc" && "arc://extensions"}
+                            {browser === "opera" && "opera://extensions"}
+                            {browser === "vivaldi" && "vivaldi://extensions"}
+                            {browser === "chromium" && "chrome://extensions"}
+                            {browser === "samsung" && "internet://extensions"}
+                          </code>
+                          <p className="text-sm text-[var(--clay-text-muted)] mt-2">
+                            • Toggle "Developer mode" ON (usually in the
+                            top-right corner)
+                          </p>
+                        </div>
+                      )}
+                      {index === 3 && (
+                        <div className="mt-4 space-y-3 text-left w-full max-w-md">
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Click the "Load unpacked" button
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Navigate to and select the extracted mnemo folder
+                          </p>
+                          <p className="text-sm text-[var(--clay-text-muted)]">
+                            • Grant permissions when prompted
+                          </p>
+                          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <p className="text-sm font-semibold text-green-700 flex items-center gap-2">
+                              <CheckCircle2 className="size-5" />
+                              Installation complete! Start managing your tabs
+                              intelligently.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </StepperContent>
+                );
+              })}
+            </StepperPanel>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between items-center pt-4">
+              <button
+                onClick={handlePrevious}
+                disabled={activeStep === 1}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[var(--clay-text)] rounded-full font-semibold hover:bg-[var(--clay-hover)] transition-all border border-[var(--clay-border)] shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Previous
+              </button>
+
+              {activeStep < installationSteps.length ? (
+                <button
+                  onClick={handleNext}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--clay-accent)] text-white rounded-full font-semibold hover:bg-[var(--clay-accent-hover)] transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  Next
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              ) : (
+                <a
+                  href={currentBrowser.storeUrl}
+                  download="mnemo.zip"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  <Download className="w-4 h-4" />
+                  Download Now
+                </a>
+              )}
+            </div>
+          </Stepper>
+        </div>
+
+        {/* Troubleshooting */}
+        <div className="mt-12 clay-card p-6 md:p-8">
+          <h3 className="text-xl font-semibold mb-4 text-[var(--clay-text)]">
+            Troubleshooting
+          </h3>
+          <div className="space-y-3 text-sm text-[var(--clay-text-muted)]">
+            <div className="flex gap-3">
+              <span className="text-[var(--clay-accent)] font-bold">•</span>
+              <p>
+                <strong className="text-[var(--clay-text)]">
+                  Extension not loading?
+                </strong>{" "}
+                Make sure you selected the correct folder containing the
+                manifest.json file
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-[var(--clay-accent)] font-bold">•</span>
+              <p>
+                <strong className="text-[var(--clay-text)]">
+                  Permissions error?
+                </strong>{" "}
+                Grant all requested permissions for full functionality
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-[var(--clay-accent)] font-bold">•</span>
+              <p>
+                <strong className="text-[var(--clay-text)]">
+                  Not working properly?
+                </strong>{" "}
+                Try disabling and re-enabling the extension, or contact us on{" "}
+                <a
+                  href="https://github.com/arsh342/mnemo/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--clay-accent)] hover:underline"
+                >
+                  GitHub
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const [browser, setBrowser] =
@@ -248,6 +541,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Installation Instructions Section */}
+      <InstallationSection browser={browser} />
 
       {/* Footer */}
       <Footer

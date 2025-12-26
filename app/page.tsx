@@ -46,33 +46,28 @@ function detectBrowser() {
 const browserConfig = {
   chrome: {
     icon: "/chrome.png",
-    text: "Add to Chrome",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Chrome",
+    storeUrl: "/mnemo.zip",
   },
   chromium: {
     icon: "/chromium.png",
-    text: "Add to Browser",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download Extension",
+    storeUrl: "/mnemo.zip",
   },
   edge: {
     icon: "/edge.png",
-    text: "Add to Edge",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Edge",
+    storeUrl: "/mnemo.zip",
   },
   brave: {
     icon: "/brave.png",
-    text: "Add to Brave",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Brave",
+    storeUrl: "/mnemo.zip",
   },
   arc: {
     icon: "/arc.png",
-    text: "Add to Arc",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Arc",
+    storeUrl: "/mnemo.zip",
   },
   firefox: {
     icon: "/firefox.png",
@@ -86,21 +81,18 @@ const browserConfig = {
   },
   opera: {
     icon: "/opera.png",
-    text: "Add to Opera",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Opera",
+    storeUrl: "/mnemo.zip",
   },
   vivaldi: {
     icon: "/vivaldi.png",
-    text: "Add to Vivaldi",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Vivaldi",
+    storeUrl: "/mnemo.zip",
   },
   samsung: {
     icon: "/samsungbrowser.png",
-    text: "Add to Samsung Internet",
-    storeUrl:
-      "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
+    text: "Download for Samsung Internet",
+    storeUrl: "/mnemo.zip",
   },
 };
 
@@ -161,8 +153,7 @@ export default function Home() {
             {currentBrowser.storeUrl !== "#" ? (
               <a
                 href={currentBrowser.storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                download="mnemo.zip"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#8b7bff] text-white rounded-full font-semibold hover:bg-[#9d8dff] transition-all hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <img
@@ -233,8 +224,7 @@ export default function Home() {
               {currentBrowser.storeUrl !== "#" ? (
                 <a
                   href={currentBrowser.storeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download="mnemo.zip"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8b7bff] rounded-full font-semibold hover:bg-[#fafafa] transition-all hover:scale-105 shadow-xl hover:shadow-2xl"
                 >
                   <img
@@ -284,10 +274,6 @@ export default function Home() {
           { href: "#features", label: "Features" },
           { href: "https://github.com/arsh342/mnemo", label: "Documentation" },
           { href: "https://github.com/arsh342/mnemo", label: "GitHub" },
-          {
-            href: "https://chromewebstore.google.com/detail/cgcgpmjclefdagignfafpdkeafodkmba?utm_source=item-share-cb",
-            label: "Chrome Store",
-          },
         ]}
         legalLinks={[
           { href: "/privacy", label: "Privacy Policy" },
